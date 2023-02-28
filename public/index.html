@@ -215,10 +215,18 @@
 
         onValue(sosRef, (snapshot) => {
             const sosData = snapshot.val();
-            console.log(sosData);
+            const newData = { id: '123', name: 'New Data', timestamp: Date.now() };
+            const keys = Object.keys(sosData);
+            keys.forEach((key) => {
+                if (sosData[key].id === newData.id) {
+                    const updatedData = { ...sosData[key], ...newData };
+                    sosRef.child(key).set(updatedData);
+                }
+            });
         }, (error) => {
             console.log(error);
         });
+
 
         function updateSOS(newData) {
             // check if sosData exists and if newData has same id
