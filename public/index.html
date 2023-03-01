@@ -4,16 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <!-- meta dicoding -->
-    <meta name="dicoding:email" content="muhammadrazin14@gmail.com">
 
     <title>Account - ProtectMe</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -23,16 +21,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
 <body>
 
@@ -41,7 +39,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
-                <img src="assets/img/icon seksual.png" alt="">
+                <img src="../assets/img/icon seksual.png" alt="">
                 <span class="d-none d-lg-block">ProtectMe</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -53,14 +51,14 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="assets/img/messages-1.jpg" alt="Profile" class="rounded-circle">
+                        <img src="../assets/img/messages-1.jpg" alt="Profile" class="rounded-circle">
                         <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6><?php echo $row_admin['nama'] ?></h6>
-                            <span><?php echo $row_admin['level'] ?></span>
+                            <h6>Zeen</h6>
+                            <span>Admin</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -137,8 +135,8 @@
         </div><!-- End Page Title -->
 
 
-        <h1>SOS List</h1>
-        <ul id="sos-list"></ul>
+        <h1>SOS user</h1>
+        <table id="sos-table"></table>
 
     </main><!-- End #main -->
 
@@ -155,8 +153,8 @@
 
     <script type="module">
         // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-  import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -179,17 +177,56 @@
 
   onValue(sosRef, (snapshot) => {
     const sosData = snapshot.val();
-    const sosList = document.getElementById('sos-list');
+    const sosTable = document.getElementById('sos-table');
 
-    console.log(sosData);
+    sosTable.innerHTML = '';
+
+    const headerRow = document.createElement('tr');
+    const idHeader = document.createElement('th');
+    idHeader.innerText = 'ID';
+    headerRow.appendChild(idHeader);
+
+    const iduserCell = document.createElement('th');
+    iduserCell.innerText = 'Id User';
+    headerRow.appendChild(iduserCell);
+
+    const latitudeCell = document.createElement('th');
+    latitudeCell.innerText = 'Location';
+    headerRow.appendChild(latitudeCell);
+
+    const longitudeCell = document.createElement('th');
+    headerRow.appendChild(longitudeCell);
+
+    const timestampHeader = document.createElement('th');
+    timestampHeader.innerText = 'Timestamp';
+    headerRow.appendChild(timestampHeader);
+    sosTable.appendChild(headerRow);
+
     for (let key in sosData) {
         if (sosData.hasOwnProperty(key)) {
-            const sosItem = document.createElement('li');
-            sosItem.innerText = `ID: ${sosData[key].id}, ID User: ${sosData[key].id_user}, Location:
-            ${sosData[key].latitude} ${sosData[key].longitude},
-            Timestamp: ${new
-            Date(sosData[key].timestamp).toLocaleString()}`;
-            sosList.appendChild(sosItem);
+            const sosRow = document.createElement('tr');
+
+            const idCell = document.createElement('td');
+            idCell.innerText = sosData[key].id;
+            sosRow.appendChild(idCell);
+
+            const iduserCell = document.createElement('td');
+            iduserCell.innerText = sosData[key].id_user;
+            sosRow.appendChild(iduserCell);
+
+            const latitudeCell = document.createElement('td');
+            latitudeCell.innerText = sosData[key].latitude;
+            sosRow.appendChild(latitudeCell);
+
+            const longitudeCell = document.createElement('td');
+            longitudeCell.innerText = sosData[key].longitude;
+            sosRow.appendChild(longitudeCell);
+
+            const timestampCell = document.createElement('td');
+            timestampCell.innerText = new Date(sosData[key].timestamp).toLocaleString();
+            sosRow.appendChild(timestampCell);
+
+            sosTable.appendChild(sosRow);
         }
     }
   }, (error) => {
