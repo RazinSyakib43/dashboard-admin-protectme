@@ -269,11 +269,15 @@
             sosRow.appendChild(tanggalKejadianCell);
 
             const waktuKejadianCell = document.createElement('td');
-            waktuKejadianCell.innerText = sosData[key].statusPelaksanaan;
+            waktuKejadianCell.innerText = sosData[key].waktuKejadian;
             sosRow.appendChild(waktuKejadianCell);
 
             const fileBuktiCell = document.createElement('td');
-            fileBuktiCell.innerText = sosData[key].tglKejadian;
+            const fileBuktiLink = document.createElement('a');
+            fileBuktiLink.href = sosData[key].fileBukti;
+            fileBuktiLink.innerText = sosData[key].fileBukti;
+            fileBuktiLink.target = '_blank';
+            fileBuktiCell.appendChild(fileBuktiLink);
             sosRow.appendChild(fileBuktiCell);
 
             sosTable.appendChild(sosRow);
