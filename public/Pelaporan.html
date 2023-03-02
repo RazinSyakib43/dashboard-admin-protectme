@@ -261,7 +261,18 @@
             sosRow.appendChild(pihakBersangkutanCell);
 
             const statusPelaksanaanCell = document.createElement('td');
-            statusPelaksanaanCell.innerText = sosData[key].statusPelaksanaan;
+            const statusPelaksanaanSelect = document.createElement('select');
+            statusPelaksanaanSelect.id = 'status-select-' + sosData[key].id;
+            const statusList = ['terkirim', 'verifikasi', 'proses investigasi', 'tindakan', 'kasus selesai'];
+            for (let i = 0; i < statusList.length; i++) { 
+                const option=document.createElement('option');
+                option.value=statusList[i]; option.text=statusList[i]; if (statusList[i]===sosData[key].statusPelaksanaan) {
+                option.selected=true; } statusPelaksanaanSelect.appendChild(option); }
+                statusPelaksanaanSelect.addEventListener('change', (event)=> {
+                const newStatus = event.target.value;
+                set(ref(database, 'pelaporan/' + sosData[key].id + '/statusPelaksanaan'), newStatus);
+            });
+            statusPelaksanaanCell.appendChild(statusPelaksanaanSelect);
             sosRow.appendChild(statusPelaksanaanCell);
 
             const tanggalKejadianCell = document.createElement('td');
