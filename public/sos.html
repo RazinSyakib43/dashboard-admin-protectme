@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>SOS - ProtectMe</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <!-- Vendor CSS Files -->
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.php" class="logo d-flex align-items-center">
+                <img src="../assets/img/icon seksual.png" alt="">
+                <span class="d-none d-lg-block">ProtectMe</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="../assets/img/messages-1.jpg" alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>Zeen</h6>
+                            <span>Admin</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="../../logout.php">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="index.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link " href="account.php">
+                    <i class="bi bi-grid"></i>
+                    <span>Account</span>
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+    <!-- End Sidebar-->
+
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>Data</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Account</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+
+        <h1>SOS user</h1>
+        <table id="sos-table"></table>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>ProtectMe</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by ProtectMe Developer
+        </div>
+    </footer><!-- End Footer -->
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
+    import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: "AIzaSyB8th58dpl0TxtZelRZ_Mg_xy434YPHjvc",
+    authDomain: "protectme-32fcc.firebaseapp.com",
+    databaseURL: "https://protectme-32fcc-default-rtdb.firebaseio.com",
+    projectId: "protectme-32fcc",
+    storageBucket: "protectme-32fcc.appspot.com",
+    messagingSenderId: "41289601434",
+    appId: "1:41289601434:web:e12c9d65dcf3c8149e6a23",
+    measurementId: "G-V06K4MDKT4"
+    };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  const sosRef = ref(database, 'sos');
+
+  onValue(sosRef, (snapshot) => {
+    const sosData = snapshot.val();
+    const sosTable = document.getElementById('sos-table');
+
+    sosTable.innerHTML = '';
+
+    const headerRow = document.createElement('tr');
+    const idHeader = document.createElement('th');
+    idHeader.innerText = 'ID';
+    headerRow.appendChild(idHeader);
+
+    const iduserCell = document.createElement('th');
+    iduserCell.innerText = 'Id User';
+    headerRow.appendChild(iduserCell);
+
+    const latitudeCell = document.createElement('th');
+    latitudeCell.innerText = 'Location';
+    headerRow.appendChild(latitudeCell);
+
+    const longitudeCell = document.createElement('th');
+    headerRow.appendChild(longitudeCell);
+
+    const timestampHeader = document.createElement('th');
+    timestampHeader.innerText = 'Timestamp';
+    headerRow.appendChild(timestampHeader);
+    sosTable.appendChild(headerRow);
+
+    for (let key in sosData) {
+        if (sosData.hasOwnProperty(key)) {
+            const sosRow = document.createElement('tr');
+
+            const idCell = document.createElement('td');
+            idCell.innerText = sosData[key].id;
+            sosRow.appendChild(idCell);
+
+            const iduserCell = document.createElement('td');
+            iduserCell.innerText = sosData[key].id_user;
+            sosRow.appendChild(iduserCell);
+
+            const latitudeCell = document.createElement('td');
+            latitudeCell.innerText = sosData[key].latitude;
+            sosRow.appendChild(latitudeCell);
+
+            const longitudeCell = document.createElement('td');
+            longitudeCell.innerText = sosData[key].longitude;
+            sosRow.appendChild(longitudeCell);
+
+            const timestampCell = document.createElement('td');
+            timestampCell.innerText = new Date(sosData[key].timeStamp).toLocaleString();
+            sosRow.appendChild(timestampCell);
+
+            sosTable.appendChild(sosRow);
+        }
+    }
+  }, (error) => {
+    console.log(error);
+  });
+
+  function updateSOS(newData) {
+    // check if sosData exists and if newData has same id
+    if (sosData && sosData.id === newData.id) {
+      newData.timestamp = Date.now(); // add timestamp to newData
+      set(sosRef, newData); // update sosData with newData
+    }
+  }
+    </script>
+
+
+    <script>
+        setInterval(function () {
+            location.reload();
+        }, 10000);
+    </script>
+
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
