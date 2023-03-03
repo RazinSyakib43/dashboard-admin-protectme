@@ -203,7 +203,7 @@
     sosTable.appendChild(headerRow);
 
     for (let key in sosData) {
-        if (sosData.hasOwnProperty(key)) {
+        if (sosData.hasOwnProperty(key) && sosData[key].status === true) {
             const sosRow = document.createElement('tr');
 
             const idCell = document.createElement('td');
