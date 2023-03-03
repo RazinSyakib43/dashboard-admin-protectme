@@ -136,7 +136,42 @@
 
 
         <h1>User Account</h1>
-        <table id="sos-table"></table>
+        <table id="user-table"></table>
+
+
+        <!-- <div id="edit-form">
+            <h2>Edit User</h2>
+            <form id=" edit-user-form">
+                <input type="hidden" id="edit-user-id" />
+                <label for="edit-user-name">Name:</label>
+                <input type="text" id="edit-user-name" name="name" />
+                <br />
+                <label for="edit-user-email">Email:</label>
+                <input type="email" id="edit-user-email" name="email" />
+                <br />
+                <label for="edit-user-phone">Phone:</label>
+                <input type="tel" id="edit-user-phone" name="phone" />
+                <br />
+                <label for="edit-user-gender">Gender:</label>
+                <select id="edit-user-gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <br />
+                <label for="edit-user-birthday">Birthday:</label>
+                <input type="date" id="edit-user-birthday" name="birthday" />
+                <br />
+                <label for="edit-user-address">Address:</label>
+                <textarea id="edit-user-address" name="address"></textarea>
+                <br />
+                <label for="edit-user-image">Profile Image:</label>
+                <input type="text" id="edit-user-image" name="image" />
+                <br />
+                <button type="submit">Save</button>
+                <button type="button" onclick="cancelEdit()">Cancel</button>
+            </form>
+        </div> -->
 
     </main><!-- End #main -->
 
@@ -149,7 +184,6 @@
             Designed by ProtectMe Developer
         </div>
     </footer><!-- End Footer -->
-
 
     <script type="module">
         // Import the functions you need from the SDKs you need
@@ -176,85 +210,99 @@
   const sosRef = ref(database, 'users');
 
   onValue(sosRef, (snapshot) => {
-    const sosData = snapshot.val();
-    const sosTable = document.getElementById('sos-table');
+    const userData = snapshot.val();
+    const userTable = document.getElementById('user-table');
 
-    sosTable.innerHTML = '';
+    userTable.innerHTML = '';
 
     const headerRow = document.createElement('tr');
     const idHeader = document.createElement('th');
     idHeader.innerText = 'ID';
     headerRow.appendChild(idHeader);
 
-    const iduserCell = document.createElement('th');
-    iduserCell.innerText = 'Nama';
-    headerRow.appendChild(iduserCell);
+    const namaCell = document.createElement('th');
+    namaCell.innerText = 'Nama';
+    headerRow.appendChild(namaCell);
 
-    const jenisPelecehanCell = document.createElement('th');
-    jenisPelecehanCell.innerText = 'Email';
-    headerRow.appendChild(jenisPelecehanCell);
+    const emailCell = document.createElement('th');
+    emailCell.innerText = 'Email';
+    headerRow.appendChild(emailCell);
 
-    const judulPelecehanCell = document.createElement('th');
-    judulPelecehanCell.innerText = 'Nomor HP';
-    headerRow.appendChild(judulPelecehanCell);
+    const noHpCell = document.createElement('th');
+    noHpCell.innerText = 'Nomor HP';
+    headerRow.appendChild(noHpCell);
 
-    const kronologiCell = document.createElement('th');
-    kronologiCell.innerText = 'Jenis Kelamin';
-    headerRow.appendChild(kronologiCell);
+    const jenisKelaminCell = document.createElement('th');
+    jenisKelaminCell.innerText = 'Jenis Kelamin';
+    headerRow.appendChild(jenisKelaminCell);
 
-    const lokasiKejadianCell = document.createElement('th');
-    lokasiKejadianCell.innerText = 'Tanggal Lahir';
-    headerRow.appendChild(lokasiKejadianCell);
+    const tglLahirCell = document.createElement('th');
+    tglLahirCell.innerText = 'Tanggal Lahir';
+    headerRow.appendChild(tglLahirCell);
 
-    const pihakBersangkutanCell = document.createElement('th');
-    pihakBersangkutanCell.innerText = 'Alamat';
-    headerRow.appendChild(pihakBersangkutanCell);
+    const alamatCell = document.createElement('th');
+    alamatCell.innerText = 'Alamat';
+    headerRow.appendChild(alamatCell);
 
-    const statusPelaksanaanCell = document.createElement('th');
-    statusPelaksanaanCell.innerText = 'Profile Image';
-    headerRow.appendChild(statusPelaksanaanCell);
+    const actionCell = document.createElement('th');
+    actionCell.innerText = 'Action';
+    headerRow.appendChild(actionCell);
 
-    sosTable.appendChild(headerRow);
+    userTable.appendChild(headerRow);
 
-    for (let key in sosData) {
-    if (sosData.hasOwnProperty(key)) {
-    const sosRow = document.createElement('tr');
+    for (let key in userData) {
+        if (userData.hasOwnProperty(key)) {
+        const userRow = document.createElement('tr');
 
-    const idCell = document.createElement('td');
-    idCell.innerText = sosData[key].id;
-    sosRow.appendChild(idCell);
+        const idCell = document.createElement('td');
+        idCell.innerText = userData[key].id;
+        userRow.appendChild(idCell);
 
-    const iduserCell = document.createElement('td');
-    iduserCell.innerText = sosData[key].nama;
-    sosRow.appendChild(iduserCell);
+        const namaCell = document.createElement('td');
+        namaCell.innerText = userData[key].nama;
+        userRow.appendChild(namaCell);
 
-    const jenisPelecehanCell = document.createElement('td');
-    jenisPelecehanCell.innerText = sosData[key].email;
-    sosRow.appendChild(jenisPelecehanCell);
+        const emailCell = document.createElement('td');
+        emailCell.innerText = userData[key].email;
+        userRow.appendChild(emailCell);
 
-    const judulPelecehanCell = document.createElement('td');
-    judulPelecehanCell.innerText = sosData[key].no_hp;
-    sosRow.appendChild(judulPelecehanCell);
+        const noHpCell = document.createElement('td');
+        noHpCell.innerText = userData[key].no_hp;
+        userRow.appendChild(noHpCell);
 
-    const kronologiCell = document.createElement('td');
-    kronologiCell.innerText = sosData[key].jenis_kelamin;
-    sosRow.appendChild(kronologiCell);
+        const jenisKelaminCell = document.createElement('td');
+        jenisKelaminCell.innerText = userData[key].jenis_kelamin;
+        userRow.appendChild(jenisKelaminCell);
 
-    const lokasiKejadianCell = document.createElement('td');
-    lokasiKejadianCell.innerText = sosData[key].tgl_lahir;
-    sosRow.appendChild(lokasiKejadianCell);
+        const tglLahirCell = document.createElement('td');
+        tglLahirCell.innerText = userData[key].tgl_lahir;
+        userRow.appendChild(tglLahirCell);
 
-    const pihakBersangkutanCell = document.createElement('td');
-    pihakBersangkutanCell.innerText = sosData[key].alamat;
-    sosRow.appendChild(pihakBersangkutanCell);
+        const alamatCell = document.createElement('td');
+        alamatCell.innerText = userData[key].alamat;
+        userRow.appendChild(alamatCell);
 
-    const statusPelaksanaanCell = document.createElement('td');
-    statusPelaksanaanCell.innerText = sosData[key].url_img;
-    sosRow.appendChild(statusPelaksanaanCell);
+        const actionCell = document.createElement('td');
 
-    sosTable.appendChild(sosRow);
+        const editButton = document.createElement('button');
+        editButton.innerText = 'Edit';
+        editButton.addEventListener('click', () => {
+        editUser(userData[key].id);
+        });
+        actionCell.appendChild(editButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.addEventListener('click', () => {
+        deleteUser(userData[key].id);
+        });
+        actionCell.appendChild(deleteButton);
+
+        userRow.appendChild(actionCell);
+
+        userTable.appendChild(userRow);
+        }
     }
-    } 
   }, (error) => {
     console.log(error);
   });
