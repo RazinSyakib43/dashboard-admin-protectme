@@ -173,7 +173,7 @@
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
 
-  const sosRef = ref(database, 'sos');
+  const sosRef = ref(database, 'users');
 
   onValue(sosRef, (snapshot) => {
     const sosData = snapshot.val();
@@ -187,44 +187,32 @@
     headerRow.appendChild(idHeader);
 
     const iduserCell = document.createElement('th');
-    iduserCell.innerText = 'Id User';
+    iduserCell.innerText = 'Nama';
     headerRow.appendChild(iduserCell);
 
     const jenisPelecehanCell = document.createElement('th');
-    jenisPelecehanCell.innerText = 'Jenis Pelecehan';
+    jenisPelecehanCell.innerText = 'Email';
     headerRow.appendChild(jenisPelecehanCell);
 
     const judulPelecehanCell = document.createElement('th');
-    judulPelecehanCell.innerText = 'Judul Pelecehan';
+    judulPelecehanCell.innerText = 'Nomor HP';
     headerRow.appendChild(judulPelecehanCell);
 
     const kronologiCell = document.createElement('th');
-    kronologiCell.innerText = 'Kronologi';
+    kronologiCell.innerText = 'Jenis Kelamin';
     headerRow.appendChild(kronologiCell);
 
     const lokasiKejadianCell = document.createElement('th');
-    lokasiKejadianCell.innerText = 'Lokasi Kejadian';
+    lokasiKejadianCell.innerText = 'Tanggal Lahir';
     headerRow.appendChild(lokasiKejadianCell);
 
     const pihakBersangkutanCell = document.createElement('th');
-    pihakBersangkutanCell.innerText = 'Pihak Bersangkutan';
+    pihakBersangkutanCell.innerText = 'Alamat';
     headerRow.appendChild(pihakBersangkutanCell);
 
     const statusPelaksanaanCell = document.createElement('th');
-    statusPelaksanaanCell.innerText = 'Status Pelaksanaan';
+    statusPelaksanaanCell.innerText = 'Profile Image';
     headerRow.appendChild(statusPelaksanaanCell);
-
-    const tanggalKejadianCell = document.createElement('th');
-    tanggalKejadianCell.innerText = 'Tanggal Kejadian';
-    headerRow.appendChild(tanggalKejadianCell);
-
-    const waktuKejadianCell = document.createElement('th');
-    waktuKejadianCell.innerText = 'Waktu Kejadian';
-    headerRow.appendChild(waktuKejadianCell);
-
-    const fileBuktiCell = document.createElement('th');
-    fileBuktiCell.innerText = 'File Bukti';
-    headerRow.appendChild(fileBuktiCell);
 
     sosTable.appendChild(headerRow);
 
@@ -237,44 +225,32 @@
     sosRow.appendChild(idCell);
 
     const iduserCell = document.createElement('td');
-    iduserCell.innerText = sosData[key].id_user;
+    iduserCell.innerText = sosData[key].nama;
     sosRow.appendChild(iduserCell);
 
     const jenisPelecehanCell = document.createElement('td');
-    jenisPelecehanCell.innerText = sosData[key].jenisPelecehan;
+    jenisPelecehanCell.innerText = sosData[key].email;
     sosRow.appendChild(jenisPelecehanCell);
 
     const judulPelecehanCell = document.createElement('td');
-    judulPelecehanCell.innerText = sosData[key].judulPelecehan;
+    judulPelecehanCell.innerText = sosData[key].no_hp;
     sosRow.appendChild(judulPelecehanCell);
 
     const kronologiCell = document.createElement('td');
-    kronologiCell.innerText = sosData[key].kronologi;
+    kronologiCell.innerText = sosData[key].jenis_kelamin;
     sosRow.appendChild(kronologiCell);
 
     const lokasiKejadianCell = document.createElement('td');
-    lokasiKejadianCell.innerText = sosData[key].lokasiKejadian;
+    lokasiKejadianCell.innerText = sosData[key].tgl_lahir;
     sosRow.appendChild(lokasiKejadianCell);
 
     const pihakBersangkutanCell = document.createElement('td');
-    pihakBersangkutanCell.innerText = sosData[key].pihakBersangkutan;
+    pihakBersangkutanCell.innerText = sosData[key].alamat;
     sosRow.appendChild(pihakBersangkutanCell);
 
     const statusPelaksanaanCell = document.createElement('td');
-    statusPelaksanaanCell.innerText = sosData[key].statusPelaksanaan;
+    statusPelaksanaanCell.innerText = sosData[key].url_img;
     sosRow.appendChild(statusPelaksanaanCell);
-
-    const tanggalKejadianCell = document.createElement('td');
-    tanggalKejadianCell.innerText = sosData[key].tglKejadian;
-    sosRow.appendChild(tanggalKejadianCell);
-
-    const waktuKejadianCell = document.createElement('td');
-    waktuKejadianCell.innerText = sosData[key].statusPelaksanaan;
-    sosRow.appendChild(waktuKejadianCell);
-
-    const fileBuktiCell = document.createElement('td');
-    fileBuktiCell.innerText = sosData[key].tglKejadian;
-    sosRow.appendChild(fileBuktiCell);
 
     sosTable.appendChild(sosRow);
     }
@@ -293,11 +269,11 @@
     </script>
 
 
-    <script>
+    <!-- <script>
         setInterval(function () {
             location.reload();
         }, 10000);
-    </script>
+    </script> -->
 
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
