@@ -202,6 +202,8 @@
     headerRow.appendChild(timestampHeader);
     sosTable.appendChild(headerRow);
 
+    let hasData = false;
+
     for (let key in sosData) {
         if (sosData.hasOwnProperty(key) && sosData[key].status === true) {
             const sosRow = document.createElement('tr');
@@ -227,8 +229,16 @@
             sosRow.appendChild(timestampCell);
 
             sosTable.appendChild(sosRow);
+            hasData = true;
         }
     }
+
+      if (!hasData) {
+      const noDataText = document.createElement('p');
+      noDataText.innerText = "Tidak ada user yang mengaktifkan SOS";
+      sosTable.appendChild(noDataText);
+      }
+
   }, (error) => {
     console.log(error);
   });
